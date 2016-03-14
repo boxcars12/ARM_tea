@@ -41,11 +41,11 @@ def Cube():
 
 def main():
     pygame.init()
-    display = (800,600)
+    display = (600,600)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
     pygame.display.set_caption('This is a cube')
 
-    gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
+    gluPerspective(45, (display[0]/display[1]), 0.1, 15.0)
 
     glTranslatef(0.0,0.0, -5)
 

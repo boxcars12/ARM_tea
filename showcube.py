@@ -43,6 +43,7 @@ def main():
     pygame.init()
     display = (800,600)
     pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+    pygame.display.set_caption('This is a cube')
 
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
 
@@ -53,8 +54,13 @@ def main():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F4 and bool(event.mod & pygame.KMOD_ALT):
+                    pygame.quit()
+                quit()
 
-        glRotatef(1, 3, 1, 1)
+        glRotatef(1,3,2,1)
+
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
         Cube()
         pygame.display.flip()

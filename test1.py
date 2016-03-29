@@ -193,7 +193,14 @@ robot1.start_coordinates[2] = 0
 #create first link
 link1 = Link(robot1.start_coordinates, robot1.start_coordinates, 0, [0, 0, 1], 1, 1, 1)
 
+#link2
+#create line from l1 to furthest goal
+#create lines from l1 to edges of moat
+#create line from l1 to over edge of moat (above, shortest)
+#exxagerate angle and length, create link2
 
+#link3
+#angle change l1 to l2 should be reversed from l2 to l3
 
 print "link1: %s" % link1
 

@@ -18,15 +18,18 @@ class Robot:
 
 class Link:
 
-    def __init__(self, start_coordinates, end_coordinates, orientation, length, width, joint_types, placeholder):
+    def __init__(self, start_coordinates, end_coordinates, length, orientation, width, joint_types, placeholder):
         print "Link created"
         self.start_coordinates = start_coordinates
         self.end_coordinates = end_coordinates
-        self.orientation = orientation
         self.length = length
+        self.orientation = orientation
         self.width = width
         self.joint_types = joint_types
         self.placeholder = placeholder
+
+    def __str__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
 
 
 class Joint:
@@ -38,6 +41,9 @@ class Joint:
         self.motors = motors
         self.range = range
         self.placeholder = placeholder
+
+    def __str__(self):
+        return str(self.__class__) + ": " + str(self.__dict__)
 
 
 class EndEffector:
@@ -151,7 +157,7 @@ input1 = Input(goals1, moats1, path1, 1)
 
 
 #create robot
-print goals1.list[0], goals1.list[1], goals1.list[2]
+#print goals1.list[0], goals1.list[1], goals1.list[2]
 
 max_x_value = 0.0
 min_x_value = 0.0
@@ -179,5 +185,16 @@ print "y: (%.2f, %.2f)" % (min_y_value, max_y_value)
 print "z: (%.2f, %.2f)" % (min_z_value, max_z_value)
 
 
-#robot1 = Robot([(max_x_value-min_x_value)/2, (max_y_value-min_y_value)/2, (max_z_value-min_z_value)/2], None, None, 1, 1)
+robot1 = Robot([(max_x_value-min_x_value)/2, (max_y_value-min_y_value)/2, (max_z_value-min_z_value)/2], None, None, 1, 1)
 
+#zero z
+robot1.start_coordinates[2] = 0
+
+#create first link
+link1 = Link(robot1.start_coordinates, robot1.start_coordinates, 0, [0, 0, 1], 1, 1, 1)
+
+
+
+print "link1: %s" % link1
+
+print robot1

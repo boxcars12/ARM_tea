@@ -1,129 +1,10 @@
-#from class_definitions import *
-#classes move to class_definitions.py
+from class_definitions import *
+from math import sqrt, fabs
 
-
-class Robot:
-
-    def __init__(self, start_coordinates, links, joints, end_effector, placeholder):
-        print "Robot created"
-        self.start_coordinates = start_coordinates
-        self.links = links
-        self.joints = joints
-        self.end_effector = end_effector
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Link:
-
-    def __init__(self, start_coordinates, end_coordinates, length, orientation, width, joint_types, placeholder):
-        print "Link created"
-        self.start_coordinates = start_coordinates
-        self.end_coordinates = end_coordinates
-        self.length = length
-        self.orientation = orientation
-        self.width = width
-        self.joint_types = joint_types
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Joint:
-
-    def __init__(self, position, joint_type, motors, range, placeholder):
-        print "Joint created"
-        self.position = position
-        self.joint_type = joint_type
-        self.motors = motors
-        self.range = range
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class EndEffector:
-
-    def __init__(self):
-        pass
-
-
-class Goal:
-
-    def __init__(self, coordinates, size, orientable, shape, placeholder):
-        print "Goal created"
-        self.coordinates = coordinates
-        self.size = size
-        self.orientable = orientable
-        self.shape = shape
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Goals:
-
-    def __init__(self):
-        print "Goals created"
-        self.list = []
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Moat:
-
-    def __init__(self, coordinates, size, orientable, shape, placeholder):
-        print "Moat created"
-        self.coordinates = coordinates
-        self.size = size
-        self.orientable = orientable
-        self.shape = shape
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Moats:
-
-    def __init__(self):
-        print "Moats created"
-        self.list = []
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Path:
-
-    def __init__(self, steps, complexity, placeholder):
-        print "Path created"
-        self.steps = steps
-        self.complexity = complexity
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
-
-class Input:
-
-    def __init__(self, goals, moats, path, placeholder):
-        print "Input created"
-        self.goals = goals
-        self.moats = moats
-        self.path = path
-        self.placeholder = placeholder
-
-    def __str__(self):
-        return str(self.__class__) + ": " + str(self.__dict__)
-
+#from function_definitions import *
+#move to function_definitions.py
+def euc_distance(iniCoor, endCoor):
+    return sqrt(pow(fabs(iniCoor[0] - endCoor[0]), 2) + pow(fabs(iniCoor[1] - endCoor[1]), 2) + pow(fabs(iniCoor[2] - endCoor[2]), 2))
 
 
 
@@ -192,12 +73,31 @@ robot1.start_coordinates[2] = 0
 
 #create first link
 link1 = Link(robot1.start_coordinates, robot1.start_coordinates, 0, [0, 0, 1], 1, 1, 1)
+robot1.links.list.append(link1)
 
-#link2
-#create line from l1 to furthest goal
-#create lines from l1 to edges of moat
-#create line from l1 to over edge of moat (above, shortest)
-#exxagerate angle and length, create link2
+#modify link1 length
+link1.length = euc_distance(robot1.start_coordinates, [max_x_value, max_y_value, max_z_value])
+
+#does link 1 intersect any moat?
+print(moats1)
+
+#smallest configuration going over moat's z:
+
+max_values = [0, 0, 0]
+for moat in moats1.list:
+    if moat.coordinates + moat.size > max_values:
+        max_values = moat.coordinates + moat.size
+
+link1.end_coordinates = max_values
+link1.length = euc_distance(link1.start_coordinates, link1.end_coordinates)
+
+link2 = Link(link1.end_coordinates, [max_x_value, max_y_value, max_z_value])
+link2.length = euc_distance(link2.start_coordinates, link2.end_coordinates)
+robot1.links.list.append(link2)
+
+for link in robot1.links.list:
+    #export truss info here
+    pass
 
 #link3
 #angle change l1 to l2 should be reversed from l2 to l3
@@ -205,3 +105,4 @@ link1 = Link(robot1.start_coordinates, robot1.start_coordinates, 0, [0, 0, 1], 1
 print "link1: %s" % link1
 
 print robot1
+

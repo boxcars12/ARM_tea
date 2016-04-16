@@ -73,7 +73,7 @@ robot1.start_coordinates[2] = 0
 
 #create first link
 link1 = Link(robot1.start_coordinates, robot1.start_coordinates, 0, [0, 0, 1], 1, 1, 1)
-robot1.links.list.append(link1)
+robot1.links = [link1]
 
 #modify link1 length
 link1.length = euc_distance(robot1.start_coordinates, [max_x_value, max_y_value, max_z_value])
@@ -91,11 +91,11 @@ for moat in moats1.list:
 link1.end_coordinates = max_values
 link1.length = euc_distance(link1.start_coordinates, link1.end_coordinates)
 
-link2 = Link(link1.end_coordinates, [max_x_value, max_y_value, max_z_value])
+link2 = Link(link1.end_coordinates, [max_x_value, max_y_value, max_z_value], 1, 1, 1, 1, 1)
 link2.length = euc_distance(link2.start_coordinates, link2.end_coordinates)
-robot1.links.list.append(link2)
+robot1.links = [link1, link2]
 
-for link in robot1.links.list:
+for link in robot1.links:
     #export truss info here
     pass
 

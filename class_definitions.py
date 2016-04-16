@@ -3,7 +3,7 @@ class Robot:
     def __init__(self, start_coordinates, links, joints, end_effector, placeholder):
         print "Robot created"
         self.start_coordinates = start_coordinates
-        self.links.list = links
+        self.links = links
         self.joints = joints
         self.end_effector = end_effector
         self.placeholder = placeholder

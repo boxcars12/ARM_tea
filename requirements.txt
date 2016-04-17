@@ -1,0 +1,25 @@
+INPUT:
+-list of goals
+--goal has: x, y, z, size(x,y,z)
+-
+-
+
+
+HARDWARE:
+-board plywood
+-arduino microcontr
+-batteries
+-battery holder
+-servos
+-wire
+-soldering iron
+-
+
+
+RESULTS:
+-list of operations
+-stls of printed parts
+-hex file flash arduino
+-summary (report) 
+
+

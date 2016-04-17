@@ -85,8 +85,8 @@ print(moats1)
 
 max_values = [0, 0, 0]
 for moat in moats1.list:
-    if moat.coordinates + moat.size > max_values:
-        max_values = moat.coordinates + moat.size
+    if moat.coordinates + moat.size/2 > max_values:
+        max_values = moat.coordinates + moat.size/2
 
 link1.end_coordinates = max_values
 link1.length = euc_distance(link1.start_coordinates, link1.end_coordinates)

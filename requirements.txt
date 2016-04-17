@@ -1,7 +1,7 @@
 INPUT:
 -list of goals
 --goal has: x, y, z, size(x,y,z)
--
+-poop
 -
 
 

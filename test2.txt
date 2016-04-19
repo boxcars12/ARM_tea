@@ -1,0 +1,20 @@
+input goals as max 6DOF coordinates
+    goals can be flexible/rigid
+        flexible goals have size
+
+input moats as sphere/cube
+
+coordinate system for inputs sets operating surface as Z-plane
+
+choose origin point for robot placement
+    origin should be centrally located among goal points
+    shifted as necessary
+    redefine coordinates based on new reference frame
+
+determine minimum DOF needed
+    if all points lie on a plane - 2DOF
+    if any goal is 3DOF and occupy 3 dimension - 3DOF Placeable
+    if any goal is 4DOF - 4DOF Directable
+    if any goal is 5DOF - 5DOF Pencilable
+    if any goal is 6DOF - 6DOF Orientable
+

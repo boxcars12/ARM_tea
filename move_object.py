@@ -81,7 +81,7 @@ def main():
 
     gluPerspective(45, (display[0]/display[1]), 0.1, 15.0)
 
-    glTranslatef(1,0.0, -5)
+    glTranslatef(0,0.0, -5)
 
     while True:
         for event in pygame.event.get():
@@ -91,7 +91,16 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F4 and bool(event.mod & pygame.KMOD_ALT):
                     pygame.quit()
-                quit()
+                    quit()
+                if event.key == pygame.K_UP:
+                    glTranslatef(0,.1,0)
+                if event.key == pygame.K_DOWN:
+                    glTranslatef(0, -.1, 0)
+                if event.key == pygame.K_LEFT:
+                    glTranslatef(-.1, 0, 0)
+                if event.key == pygame.K_RIGHT:
+                    glTranslatef(.1, 0, 0)
+
 
         # glRotatef(1,3,2,1)
 

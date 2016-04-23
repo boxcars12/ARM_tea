@@ -8,7 +8,7 @@ coordinate system for inputs sets operating surface as Z-plane
 
 choose origin point for robot placement
     origin should be centrally located among goal points
-    shifted as necessary
+    shifted as necessary and projected to Z plane
     redefine coordinates based on new reference frame
 
 determine minimum DOF needed
@@ -18,3 +18,48 @@ determine minimum DOF needed
     if any goal is 5DOF - 5DOF Pencilable
     if any goal is 6DOF - 6DOF Orientable
 
+determine base configuration
+    for 2DOF
+        determine plane that goals lie in
+            if Y-plane
+                config = base - pitch - pitch
+            if Z-plane
+                config = crank - pitch
+            if composite plane
+                config = base ^ crank - pitch
+    for 3DOF
+        config = roll - pitch - pitch
+    for 4DOF
+        config = roll - pitch - pitch - roll
+    for 5DOF
+        config = roll - pitch - pitch - roll - pitch
+    for 6DOF
+        config = roll - pitch - pitch - roll - pitch - roll
+
+apply minimum link lengths where applicable
+
+identify farthest goal point
+
+assign link lengths for pitch joints so as to reach goal point
+    initially links will be of ratio X:1
+
+check for interference with moat
+    iteratively add bend between links to avoid moat
+    if no interference add bend of 10deg
+
+compute working volume
+
+check to ensure all goals fall within working volume
+    if not, iteratively adjust link lengths until condition is true
+
+determine inverse kinematics for each goal
+
+check for interference with moats
+
+plan path between goals
+
+check points in between goals for interference
+    search depth will be specified
+    for every level of depth the distance between goals will be halved and each additional node checked
+
+where collisions are unavoidable, add DOF
